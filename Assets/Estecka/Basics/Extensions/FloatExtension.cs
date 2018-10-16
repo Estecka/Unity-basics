@@ -16,7 +16,7 @@ namespace Estecka.Extensions {
 		public static float Remap(this float value, float iMin, float iMax, float oMin, float oMax){
 			value -= iMin;
 			value *= (oMax-oMin) / (iMax-iMin);
-			value += oMax;
+			value += oMin;
 			return value;
 		}
 

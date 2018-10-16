@@ -1,0 +1,5 @@
+# 1.0.0
+Ititial release
+
+### 1.0.1
+`float.Remap` extension method was wrong.
