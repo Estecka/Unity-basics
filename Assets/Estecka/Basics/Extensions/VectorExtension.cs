@@ -3,7 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Estecka.Extensions {
-	public static class VectorExtension  {
+	static public class VectorExtension  {
+
+		/// <summary>
+		/// Remap a vector from a Range I to a Range O componente-wise
+		/// </summary>
+		/// <returns>oMin + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
+		/// <param name="value">Value to remap</param>
+		/// <param name="iMin">Lower bound of the input range</param>
+		/// <param name="iMax">Upper bound of the input range</param>
+		/// <param name="oMin">Lower bound of the output range</param>
+		/// <param name="oMax">Upper bound of the output range</param>
+		static public Vector2 Remap(this Vector2 value, Vector2 iMin, Vector2 iMax, Vector2 oMin, Vector2 oMax){
+			value.x = FloatExtension.Remap(value.x, iMin.x, iMax.x, oMin.x, oMax.x);
+			value.y = FloatExtension.Remap(value.y, iMin.y, iMax.y, oMin.y, oMax.y);
+			return value;
+		}
+		/// <summary>
+		/// Remap a vector from a Range I to a Range O componente-wise
+		/// </summary>
+		/// <returns>oMin + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
+		/// <param name="value">Value to remap</param>
+		/// <param name="iMin">Lower bound of the input range</param>
+		/// <param name="iMax">Upper bound of the input range</param>
+		/// <param name="oMin">Lower bound of the output range</param>
+		/// <param name="oMax">Upper bound of the output range</param>
+		static public Vector3 Remap(this Vector3 value, Vector3 iMin, Vector3 iMax, Vector3 oMin, Vector3 oMax){
+			value.x = FloatExtension.Remap(value.x, iMin.x, iMax.x, oMin.x, oMax.x);
+			value.y = FloatExtension.Remap(value.y, iMin.y, iMax.y, oMin.y, oMax.y);
+			value.z = FloatExtension.Remap(value.z, iMin.z, iMax.z, oMin.z, oMax.z);
+			return value;
+		}
 
 		/// <summary>
 		/// Divides to two Vector2 component-wise
