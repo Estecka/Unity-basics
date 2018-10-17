@@ -7,7 +7,7 @@ namespace Estecka.Extensions {
 		/// <summary>
 		/// Remap a value from a Range I to a Range O.
 		/// </summary>
-		/// <returns>oMax + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
+		/// <returns>oMin + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
 		/// <param name="value">Value to remap</param>
 		/// <param name="iMin">Lower bound of the input range</param>
 		/// <param name="iMax">Upper bound of the input range</param>
