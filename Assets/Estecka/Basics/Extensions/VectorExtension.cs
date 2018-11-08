@@ -3,7 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Estecka.Extensions {
-	static public class VectorExtension  {
+	static public class VectorExtension {
+
+		/// <summary>
+		/// Clamps a Vector component-wise
+		/// </summary>
+		/// <param name="value">The vector to clamp</param>
+		/// <param name="min">The minimum values of each component</param>
+		/// <param name="max">The maximum values of each component</param>
+		/// <returns></returns>
+		static public Vector2 Clamp(this Vector2 value, Vector2 min, Vector2 max) {
+			value.x = Mathf.Clamp(value.x, min.x, max.x);
+			value.y = Mathf.Clamp(value.y, min.y, max.y);
+			return value;
+		}
+		/// <summary>
+		/// Clamps a Vector component-wise
+		/// </summary>
+		/// <param name="value">The vector to clamp</param>
+		/// <param name="min">The minimum values of each component</param>
+		/// <param name="max">The maximum values of each component</param>
+		/// <returns></returns>
+		static public Vector3 Clamp(this Vector3 value, Vector3 min, Vector3 max) {
+			value.x = Mathf.Clamp(value.x, min.x, max.x);
+			value.y = Mathf.Clamp(value.y, min.y, max.y);
+			value.z = Mathf.Clamp(value.z, min.z, max.z);
+			return value;
+		}
 
 		/// <summary>
 		/// Remap a vector from a Range I to a Range O componente-wise
