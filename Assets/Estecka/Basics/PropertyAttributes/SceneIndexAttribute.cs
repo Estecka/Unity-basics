@@ -19,8 +19,9 @@ namespace Estecka.EsteckaEditor {
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label){
 			if (fieldInfo.FieldType != typeof(int)){
-				Debug.LogWarning("SceneAttribute should only be used on ints.");
+				Debug.LogErrorFormat("`{0}` is not a an Int property", fieldInfo.Name);
 				EditorGUI.PropertyField(position, property, true);
+				return;
 			}
 
 			sceneNames.Clear();
