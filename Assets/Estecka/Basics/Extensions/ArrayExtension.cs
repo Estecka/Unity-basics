@@ -19,5 +19,13 @@ namespace Estecka.Extensions {
 			return output;
 		}
 
+		static public List<T> Filter<T>(this T[] input, System.Func<T, bool> iteratee){
+			List<T> output = new List<T>(input.Length);
+			for (int i=0; i<input.Length; i++)
+				if (iteratee(input[i]))
+					output.Add(input[i]);
+			return output;
+		}
+
 	} // END Extensions
 } // END Namespace
