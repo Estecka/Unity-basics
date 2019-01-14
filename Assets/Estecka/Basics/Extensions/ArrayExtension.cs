@@ -7,7 +7,7 @@ namespace Estecka.Extensions {
 		/// <summary>
 		/// Process every items from this array and returns an array of the results.
 		/// </summary>
-		/// <param name="input">The array to preocess</param>
+		/// <param name="input">The array to process</param>
 		/// <param name="conversion">The function that will convert this array's elements</param>
 		/// <typeparam name="I">The source array's element type</typeparam>
 		/// <typeparam name="O">The destination array's element type</typeparam>
