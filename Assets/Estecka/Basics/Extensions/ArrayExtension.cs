@@ -19,10 +19,17 @@ namespace Estecka.Extensions {
 			return output;
 		}
 
-		static public List<T> Filter<T>(this T[] input, System.Func<T, bool> iteratee){
+		/// <summary>
+		/// Return an array of all the elements from this array that passed the given test.
+		/// </summary>
+		/// <param name="input">The array to filter</param>
+		/// <param name="test">The method that will test each element of the array</param>
+		/// <typeparam name="T">The type of elements in both arrays.</typeparam>
+		/// <returns></returns>
+		static public List<T> Filter<T>(this T[] input, System.Func<T, bool> test){
 			List<T> output = new List<T>(input.Length);
 			for (int i=0; i<input.Length; i++)
-				if (iteratee(input[i]))
+				if (test(input[i]))
 					output.Add(input[i]);
 			return output;
 		}
