@@ -5,6 +5,21 @@ using UnityEngine;
 namespace Estecka.Extensions {
 	public static class ListExtension {
 		/// <summary>
+		/// Process every items from this list and returns an array of the results.
+		/// </summary>
+		/// <param name="input">The list to process</param>
+		/// <param name="conversion">The function that will convert this list's elements</param>
+		/// <typeparam name="I">The source list's element type</typeparam>
+		/// <typeparam name="O">The destination array's element type</typeparam>
+		/// <returns></returns>
+		static public O[] Map<I, O>(this List<I> input, System.Func<I, O> conversion){
+			O[] output = new O[input.Count];
+			for (int i=0; i<input.Count; i++)
+				output[i] = conversion.Invoke(input[i]);
+			return output;
+		}
+
+		/// <summary>
 		/// Set the List's count to the given size.
 		/// </summary>
 		/// <param name="capacity">Capacity.</param>
@@ -18,7 +33,7 @@ namespace Estecka.Extensions {
 				while (l.Count < capacity)
 					l.Add (defaultValue);
 			}
-		}//
+		}
 
 		/// <summary>
 		/// Add objects to the list if it doesn't contain it already.
