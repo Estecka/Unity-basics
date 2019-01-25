@@ -25,7 +25,7 @@ namespace Estecka.EsteckaEditor {
 
 		void OnGUI(){
 			Event e = Event.current;
-			if (e.type == EventType.keyDown && e.keyCode!= KeyCode.None) {
+			if (e.type == EventType.KeyDown && e.keyCode!= KeyCode.None) {
 				events.Add (e.keyCode);
 				events.RemoveAt (0);
 				Repaint ();
