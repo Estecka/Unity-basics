@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 namespace Estecka.EsteckaEditor {
 	[CustomPropertyDrawer(typeof(SceneIndexAttribute))]
-	public class SceneAttributeDrawer : PropertyDrawer{
+	public class SceneIndexAttributeDrawer : PropertyDrawer{
 
 		static List<string> sceneNames = new List<string>();
 
