@@ -3,7 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Estecka.Extensions {
-	public static class VectorExtension  {
+	static public class VectorExtension {
+
+		/// <summary>
+		/// Clamps a Vector component-wise
+		/// </summary>
+		/// <param name="value">The vector to clamp</param>
+		/// <param name="min">The minimum values of each component</param>
+		/// <param name="max">The maximum values of each component</param>
+		/// <returns></returns>
+		static public Vector2 Clamp(this Vector2 value, Vector2 min, Vector2 max) {
+			value.x = Mathf.Clamp(value.x, min.x, max.x);
+			value.y = Mathf.Clamp(value.y, min.y, max.y);
+			return value;
+		}
+		/// <summary>
+		/// Clamps a Vector component-wise
+		/// </summary>
+		/// <param name="value">The vector to clamp</param>
+		/// <param name="min">The minimum values of each component</param>
+		/// <param name="max">The maximum values of each component</param>
+		/// <returns></returns>
+		static public Vector3 Clamp(this Vector3 value, Vector3 min, Vector3 max) {
+			value.x = Mathf.Clamp(value.x, min.x, max.x);
+			value.y = Mathf.Clamp(value.y, min.y, max.y);
+			value.z = Mathf.Clamp(value.z, min.z, max.z);
+			return value;
+		}
+
+		/// <summary>
+		/// Remap a vector from a Range I to a Range O componente-wise
+		/// </summary>
+		/// <returns>oMin + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
+		/// <param name="value">Value to remap</param>
+		/// <param name="iMin">Lower bound of the input range</param>
+		/// <param name="iMax">Upper bound of the input range</param>
+		/// <param name="oMin">Lower bound of the output range</param>
+		/// <param name="oMax">Upper bound of the output range</param>
+		static public Vector2 Remap(this Vector2 value, Vector2 iMin, Vector2 iMax, Vector2 oMin, Vector2 oMax){
+			value.x = FloatExtension.Remap(value.x, iMin.x, iMax.x, oMin.x, oMax.x);
+			value.y = FloatExtension.Remap(value.y, iMin.y, iMax.y, oMin.y, oMax.y);
+			return value;
+		}
+		/// <summary>
+		/// Remap a vector from a Range I to a Range O componente-wise
+		/// </summary>
+		/// <returns>oMin + ( (value-iMin)*(oMax-oMin)/(iMax-iMin) )</returns>
+		/// <param name="value">Value to remap</param>
+		/// <param name="iMin">Lower bound of the input range</param>
+		/// <param name="iMax">Upper bound of the input range</param>
+		/// <param name="oMin">Lower bound of the output range</param>
+		/// <param name="oMax">Upper bound of the output range</param>
+		static public Vector3 Remap(this Vector3 value, Vector3 iMin, Vector3 iMax, Vector3 oMin, Vector3 oMax){
+			value.x = FloatExtension.Remap(value.x, iMin.x, iMax.x, oMin.x, oMax.x);
+			value.y = FloatExtension.Remap(value.y, iMin.y, iMax.y, oMin.y, oMax.y);
+			value.z = FloatExtension.Remap(value.z, iMin.z, iMax.z, oMin.z, oMax.z);
+			return value;
+		}
 
 		/// <summary>
 		/// Divides to two Vector2 component-wise

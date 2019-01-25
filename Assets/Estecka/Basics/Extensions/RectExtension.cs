@@ -84,13 +84,21 @@ namespace Estecka.Extensions {
 		/// </summary>
 		/// <param name="rect">The rect to draw.</param>
 		/// <param name="referenceSpace">The space the rect will be drawn into.</param>
-		public static void DrawGizmos(this Rect rect, Transform referenceSpace = null){
+		/// <param name="useXZ">Should the rect be drawn onto the traditional 2D XY plan (false) or onto the horizontal XZ plan ?</param>
+		public static void DrawGizmos(this Rect rect, Transform referenceSpace = null, bool useXZ = false){
 			bool backface = (rect.width<0 | rect.height<0);
 			Vector3
-			m00 = rect.min,
-			m01 = new Vector3 (rect.xMax, rect.yMin, 0),
-			m10 = new Vector3 (rect.xMin, rect.yMax, 0),
-			m11 = rect.max;
+				m00 = rect.min,
+				m01 = new Vector3 (rect.xMax, rect.yMin, 0),
+				m10 = new Vector3 (rect.xMin, rect.yMax, 0),
+				m11 = rect.max;
+				
+			if (useXZ){
+				m00 = m00.zUp();
+				m01 = m01.zUp();
+				m10 = m10.zUp();
+				m11 = m11.zUp();
+			}
 
 			if (referenceSpace) {
 				m00 = referenceSpace.TransformPoint (m00);

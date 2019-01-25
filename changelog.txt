@@ -3,3 +3,11 @@ Ititial release
 
 ### 1.0.1
 `float.Remap` extension method was wrong.
+
+## 1.1
+Added scene `PreLoader` behaviour and `SceneIndex` attribute
+Added `Remap` method for Vector2 and Vector3
+Added `Clamp` method for Vector2 and Vector3
+Added XZ option for `Rect.DrawGizmos`
+Added `Map` method for Arrays
+Added `Filter` method for Arrays
