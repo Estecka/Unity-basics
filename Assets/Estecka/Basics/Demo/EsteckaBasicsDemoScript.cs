@@ -17,6 +17,8 @@ namespace Estecka.Demo {
 		[RuntimeOnly] public int runtimeOnly;
 		[RectPivot(0.5f, 0.5f)] public Rect rectPivot;
 		[PreviewSprite] public Sprite previewSprite;
+		[SceneIndex] public int sceneIndex = 10;
+		[ScenePath] public string scenePath = "someScene";
 
 		[Header("Estecka's primitives")]
 		[jauge.FullEditor] public jauge jaugeFullEditor = new jauge(1);
