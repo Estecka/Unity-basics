@@ -16,10 +16,7 @@ namespace Estecka {
 
 		public void OnBeforeSerialize(){}
 		public void OnAfterDeserialize(){
-			if (Application.isPlaying)
-				this.RuntimeValidation();
-			else
-				this.EditorValidation();
+			this.RuntimeValidation();
 		}
 
 
@@ -64,14 +61,6 @@ namespace Estecka {
 				this.buildIndex = foundIndex;
 			}
 		}
-
-		public void EditorValidation(){
-			#if !UNITY_EDITOR
-			Debug.LogError("EditorValidation will not work in builds.");
-			#else
-			#endif
-		}
-
 
 
 		public bool isValid { get { return this.buildIndex>-1; } }
