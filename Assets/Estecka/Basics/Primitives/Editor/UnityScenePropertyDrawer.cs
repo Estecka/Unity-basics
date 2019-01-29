@@ -70,6 +70,33 @@ namespace Estecka.EsteckaEditor {
 			}
 		}
 
+		/// <summary>
+		/// Verify the coherence of a given scene's data, and try to correct them if necessary. 
+		/// If a sceneAsset is assigned, it will be used as a guide, otherwise, the assigned path will be used.
+		/// </summary>
+		/// <param name="scene">The scene to verify</param>
+		/// <returns>The corrected scene, or the same scene if no correction was made.</returns>
+		static public UnityScene Validate(UnityScene scene){
+			if (scene.sceneAsset == null) 
+			{
+				SceneAsset foundAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scene.path);
+				if (foundAsset == null){
+					scene.buildIndex = -1;
+					scene.path = null;
+				} else{
+					scene.sceneAsset = foundAsset;
+					scene.buildIndex = SceneUtility.GetBuildIndexByScenePath(scene.path);
+				}
+				return scene;
+			}
+			else //if (scene.sceneAsset != null)
+			{
+				scene.path = AssetDatabase.GetAssetPath(scene.sceneAsset);
+				scene.buildIndex = SceneUtility.GetBuildIndexByScenePath(scene.path);
+				return scene;
+			}
+		}
+
 	} // END PropertyDrawer
 } // END Namespace
 #endif
