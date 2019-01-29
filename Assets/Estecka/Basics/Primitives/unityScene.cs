@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Estecka {
 	[System.Serializable]
-	public struct UnityScene : ISerializationCallbackReceiver {
+	public struct UnityScene : ISerializationCallbackReceiver, System.IEquatable<UnityScene> {
 		#if UNITY_EDITOR
 		public UnityEditor.SceneAsset sceneAsset;
 		#endif
@@ -64,6 +64,14 @@ namespace Estecka {
 
 
 		public bool isValid { get { return this.buildIndex>-1; } }
+
+		static public bool operator ==(UnityScene one, UnityScene other){ return  one.Equals(other); }
+		static public bool operator !=(UnityScene one, UnityScene other){ return !one.Equals(other); }
+		public bool Equals(UnityScene other){
+			return this.sceneAsset == other.sceneAsset
+				&& this.buildIndex == other.buildIndex
+				&& this.path == other.path;
+		}
 
 	} // END Struct
 } // END Namespace
