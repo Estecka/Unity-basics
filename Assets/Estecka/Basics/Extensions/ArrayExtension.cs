@@ -34,5 +34,15 @@ namespace Estecka.Extensions {
 			return output;
 		}
 
+		/// <summary>
+		/// Returns a random element from this array;
+		/// </summary>
+		/// <param name="source">The arrray to pick an element from</param>
+		/// <typeparam name="T">The type of elements from the array</typeparam>
+		/// <returns></returns>
+		static public T Any<T>(this T[] source){
+			return source[Random.Range(0, source.Length)];
+		}
+
 	} // END Extensions
 } // END Namespace

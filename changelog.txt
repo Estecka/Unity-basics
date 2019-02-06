@@ -11,3 +11,8 @@ Added `Clamp` method for Vector2 and Vector3
 Added XZ option for `Rect.DrawGizmos`
 Added `Map` method for Arrays
 Added `Filter` method for Arrays
+
+#1.2b
+Added Vector2Int extensions
+Added RectTransform extensions
+Added `Any` method for Arrays
