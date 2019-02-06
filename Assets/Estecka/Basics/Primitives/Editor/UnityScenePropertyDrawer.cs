@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
@@ -18,36 +19,49 @@ namespace Estecka.EsteckaEditor {
 				return 32;
 		}
 
-		public static float ratio;
-
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label){
 			SerializedProperty _sceneAsset = property.FindPropertyRelative ("sceneAsset");
 			SerializedProperty _buildIndex = property.FindPropertyRelative ("buildIndex");
+			SerializedProperty _path = property.FindPropertyRelative ("path");
 
 			position.height = 16;
 
 			position = EditorGUI.PrefixLabel (position, label);
-			EditorGUI.PropertyField (position, _sceneAsset, new GUIContent());
+			EditorGUI.BeginChangeCheck();
+			EditorGUI.PropertyField (position, _sceneAsset, GUIContent.none);
+			if (EditorGUI.EndChangeCheck())
+			{
+				_path.stringValue = AssetDatabase.GetAssetPath(_sceneAsset.objectReferenceValue);
+				_buildIndex.intValue = SceneUtility.GetBuildIndexByScenePath(_path.stringValue);
+			}
+			else 
+			{
+				UnityScene scene = new UnityScene(){
+					sceneAsset = _sceneAsset.objectReferenceValue as SceneAsset,
+					buildIndex = _buildIndex.intValue,
+					path = _path.stringValue
+				};
+				UnityScene foundScene = Validate(scene);
+				if (scene != foundScene){
+					if (scene.sceneAsset == null)
+					{
 
-			int originalBuildIndex = _buildIndex.intValue;
-			_buildIndex.intValue = -1;
-
-			SceneAsset asset = _sceneAsset.objectReferenceValue as SceneAsset;
-		    if (asset != null)
-		    {
-		        string message, path;
-		        MessageType mType;
-		        path = AssetDatabase.GetAssetPath(asset);
-
-				for (int i=0, j=-1; i<EditorBuildSettings.scenes.Length; i++){
-					bool enabled = EditorBuildSettings.scenes [i].enabled;
-					if (enabled)
-						j++;
-					if (EditorBuildSettings.scenes [i].path == path) {
-						_buildIndex.intValue = enabled ? j : -1;
-						break;
 					}
-		        }
+					else
+					{
+
+					}
+
+					_sceneAsset.objectReferenceValue = foundScene.sceneAsset;
+					_buildIndex.intValue = foundScene.buildIndex;
+					_path.stringValue = foundScene.path;
+				}
+			}
+
+		    if (_sceneAsset.objectReferenceValue != null)
+		    {
+		        string message;
+		        MessageType mType;
 		 	   if (_buildIndex.intValue >= 0) {
 					mType = MessageType.None;
 					message = "BuildIndex : " + _buildIndex.intValue;
@@ -60,13 +74,6 @@ namespace Estecka.EsteckaEditor {
 				position.y += 16;
 				position.width -= 18;
 				EditorGUI.HelpBox (position, message, mType);
-
-				if (originalBuildIndex != _buildIndex.intValue) {
-					if (_buildIndex.intValue == -1)
-						Debug.LogWarning ("Referenced scene was removed from the Build Settings", asset);
-					else
-						Debug.Log ("Referenced scene's build index was updated.", asset);
-				}
 			}
 		}
 
