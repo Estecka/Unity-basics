@@ -30,11 +30,18 @@ namespace Estecka.EsteckaEditor {
 				if (scenes[i].enabled)
 					sceneNames.Add(scenes[i].path);
 			}
-			int index = EditorGUI.Popup(position, label.text, sceneNames.IndexOf(property.stringValue), sceneNames.ToArray());
+			position = EditorGUI.PrefixLabel(position, label);
+
+			if (sceneNames.IndexOf(property.stringValue) < 0)
+				GUI.color = Color.red;
+			int index = EditorGUI.Popup(position, sceneNames.IndexOf(property.stringValue), sceneNames.ToArray());
+			GUI.color = Color.white;
+
 			if (index >= 0)
 				property.stringValue = sceneNames[index];
-			else
-				property.stringValue = null;
+			else 
+				EditorGUI.LabelField(position, property.stringValue);
+				
 		}
 
 	} // END Drawer
