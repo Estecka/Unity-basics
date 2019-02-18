@@ -16,3 +16,4 @@ Added `Filter` method for Arrays
 Added Vector2Int extensions
 Added RectTransform extensions
 Added `Any` method for Arrays
+Added an Editor window to test Regular Expressions
