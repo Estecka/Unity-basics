@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace EsteckaEditor {
+namespace Estecka.EsteckaEditor {
 	public class HideFlagEditor : EditorWindow {
 		[System.Flags] private enum PseudoHideFlags {
 			HideInHierarchy 	= HideFlags.HideInHierarchy, 	// 0x1
