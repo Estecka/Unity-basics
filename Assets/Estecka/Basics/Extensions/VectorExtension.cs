@@ -84,6 +84,28 @@ namespace Estecka.Extensions {
 		}
 
 		/// <summary>
+		/// Multiply to two Vector2 component-wise, and return the result. 
+		/// Unlike `Vector2.Scale`, it does not modify the vector it was called onto.
+		/// </summary>
+		/// <returns>The resulting vector</returns>
+		public static Vector2 Multiply(this Vector2 me, Vector2 divider){
+			me.x *= divider.x;
+			me.y *= divider.y;
+			return me;
+		}
+		/// <summary>
+		/// Multiply to two Vector3 component-wise
+		/// Unlike `Vector3.Scale`, it does not modify the vector it was called onto.
+		/// </summary>
+		/// <returns>The resulting vector</returns>
+		public static Vector3 Multiply(this Vector3 me, Vector3 divider){
+			me.x *= divider.x;
+			me.y *= divider.y;
+			me.z *= divider.z;
+			return me;
+		}
+
+		/// <summary>
 		/// Converts a Vector2 to Vector3 by swapping the Y and Z axes.
 		/// </summary>
 		public static Vector3 zUp (this Vector2 me)

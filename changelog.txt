@@ -17,3 +17,4 @@ Added Vector2Int extensions
 Added RectTransform extensions
 Added `Any` method for Arrays
 Added an Editor window to test Regular Expressions
+Added `Multiply` method for Vector2 and Vector3
