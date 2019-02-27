@@ -18,3 +18,4 @@ Added RectTransform extensions
 Added `Any` method for Arrays
 Added an Editor window to test Regular Expressions
 Added `Multiply` method for Vector2 and Vector3
+Added Texture2D extensions to find sprites in a sheet.
