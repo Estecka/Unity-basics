@@ -150,6 +150,8 @@ MonoBehaviour:
     width: 2
     height: 2
   previewSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  sceneIndex: 1
+  scenePath: Assets/Estecka/Basics/Demo/SomeOtherScene.unity
   jaugeFullEditor:
     max: 1
     current: 1

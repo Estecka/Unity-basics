@@ -5,21 +5,21 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 namespace Estecka.EsteckaEditor {
-	[CustomPropertyDrawer(typeof(SceneIndexAttribute))]
-	public class SceneIndexAttributeDrawer : PropertyDrawer{
+	[CustomPropertyDrawer(typeof(ScenePathAttribute))]
+	public class ScenePathDrawer : PropertyDrawer{
 
 		static List<string> sceneNames = new List<string>();
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label){
-			if (fieldInfo.FieldType != typeof(int))
+			if (fieldInfo.FieldType != typeof(string))
 				return EditorGUI.GetPropertyHeight(property, label);
 			else
 				return EditorGUIUtility.singleLineHeight;
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label){
-			if (fieldInfo.FieldType != typeof(int)){
-				Debug.LogErrorFormat("`{0}` is not a an Int property", fieldInfo.Name);
+			if (fieldInfo.FieldType != typeof(string)){
+				Debug.LogErrorFormat("`{0}` is not a string property", fieldInfo.Name);
 				EditorGUI.PropertyField(position, property, true);
 				return;
 			}
@@ -30,7 +30,18 @@ namespace Estecka.EsteckaEditor {
 				if (scenes[i].enabled)
 					sceneNames.Add(scenes[i].path);
 			}
-			property.intValue = EditorGUI.Popup(position, label.text, property.intValue, sceneNames.ToArray());
+			position = EditorGUI.PrefixLabel(position, label);
+
+			if (sceneNames.IndexOf(property.stringValue) < 0)
+				GUI.color = Color.red;
+			int index = EditorGUI.Popup(position, sceneNames.IndexOf(property.stringValue), sceneNames.ToArray());
+			GUI.color = Color.white;
+
+			if (index >= 0)
+				property.stringValue = sceneNames[index];
+			else 
+				EditorGUI.LabelField(position, property.stringValue);
+				
 		}
 
 	} // END Drawer
@@ -38,5 +49,5 @@ namespace Estecka.EsteckaEditor {
 #endif
 
 namespace Estecka {
-	public class SceneIndexAttribute : PropertyAttribute {}
+	public class ScenePathAttribute : PropertyAttribute {}
 }
