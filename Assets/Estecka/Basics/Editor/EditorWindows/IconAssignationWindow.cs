@@ -7,13 +7,16 @@ using System.Reflection;
 
 namespace Estecka.EsteckaEditor {
 	public class IconAssignationWindow : EditorWindow {
+		static MethodInfo CopyMonoScriptIconToImporters = typeof(MonoImporter).GetMethod("CopyMonoScriptIconToImporters", BindingFlags.Static|BindingFlags.NonPublic);
+		static MethodInfo SetIconForObject = typeof(EditorGUIUtility).GetMethod("SetIconForObject", BindingFlags.Static|BindingFlags.NonPublic);
+
 		[SerializeField] string iconName;
 		[SerializeField] GUIContent icon;
 
+		static readonly string iconSuffix = " icon";
 		static readonly float
 			iconMinSize = 19,
 			iconMaxSize = 67;
-
 
 
 		static void AssignIcon(Object target, GUIContent icon){
@@ -24,10 +27,13 @@ namespace Estecka.EsteckaEditor {
 				Debug.LogError ("Invalid Icon format : Not a Texture2D");
 				return;
 			}
-			System.Type editorgui = typeof(EditorGUIUtility);
-			BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic;
-			object[] args = new object[] {target, tex};
-			editorgui.InvokeMember ("SetIconForObject", flags, null, null, args);
+
+			SetIconForObject.Invoke(null, new[]{target, tex});
+
+			MonoScript monoScript = target as MonoScript;
+			if (monoScript){
+				CopyMonoScriptIconToImporters.Invoke(null, new []{ monoScript });
+			}
 
 		}//
 
@@ -45,11 +51,14 @@ namespace Estecka.EsteckaEditor {
 			iconName = EditorGUILayout.DelayedTextField ("Icon Name", iconName);
 
 			if (EditorGUI.EndChangeCheck()){
+				if (!iconName.EndsWith(iconSuffix))
+					iconName += iconSuffix;
+
 				try {
-				icon = EditorGUIUtility.IconContent (iconName);
+					icon = EditorGUIUtility.IconContent (iconName);
 				}
 				catch (System.Exception e){
-					Debug.Log (e.GetType ());
+					Debug.LogError (e);
 				}
 			}
 
